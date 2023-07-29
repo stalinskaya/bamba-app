@@ -1,14 +1,26 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostsModule } from './posts/posts.module';
-import { BaseModule } from './base/base.module';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { PostsModule } from './modules/posts/posts.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { TokenMiddleware } from './modules/auth/token.middleware';
 
 @Module({
-  imports: [PostsModule, BaseModule, UsersModule, AuthModule],
+  imports: [
+    MongooseModule.forRoot('mongodb://root:password@localhost:7500'),
+    PostsModule,
+    UsersModule,
+    AuthModule,
+    CoreModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(TokenMiddleware).forRoutes('*');
+  }
+}
