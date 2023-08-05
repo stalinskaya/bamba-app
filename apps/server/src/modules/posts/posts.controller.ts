@@ -16,7 +16,7 @@ import { PostModel } from './post.model';
 import { Roles } from '../auth/roles/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { Requestor } from '../auth/requestor.decorator';
-import { JwtPayload } from '../auth/jwt-payload.type';
+import { JwtPayload } from 'types';
 
 @ApiTags('posts')
 @Controller('posts')

@@ -1,115 +1,51 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import {Button} from 'primereact/button'
+import {InputText} from 'primereact/inputtext'
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primeflex/primeflex.css";
+import { AuthService } from '../services/auth.service';
+import { useState } from 'react';
 
 export default function Home() {
+  const [username, setUsername] = useState('username');
+  const [password, setPassword] = useState('password');
+  const [isLogged, setIsLogged] = useState(false);
+
+  const authService = new AuthService();
+
+  const onSubmit = ((event) => {
+    console.log(`Hello ${username}`);
+    setUsername('');
+    setPassword('');
+    return authService.login({username, password})
+        .then(() => {
+          setIsLogged(authService.isLoggedIn());
+        })
+        .catch(alertService.error);
+  });
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+      <div className="text-center mb-5">
+        <div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+        <span className="text-600 font-medium line-height-3">Don't have an account?</span>
+        <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+      </div>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <div>
+        <label htmlFor="username" className="block text-900 font-medium mb-2">Username</label>
+        <InputText id="username" name="username" type="text" value={username} placeholder="Username" className="w-full mb-3" onChange={(event) => {
+          setUsername(event.target.value);
+        }}/>
 
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label>
+        <InputText id="password" name="password" type="password" value={password} placeholder="Password" className="w-full mb-3" onChange={(event) => {
+          setPassword(event.target.value);
+        }}/>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+        <Button label="Sign In" icon="pi pi-user" className="w-full" onClick={() => onSubmit()}/>
+      </div>
     </div>
   )
 }

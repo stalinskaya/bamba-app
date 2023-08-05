@@ -7,11 +7,10 @@ import {
   HttpStatus,
   Param,
   Patch,
-  Post,
 } from '@nestjs/common';
 import { BaseService } from '../base/base.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from 'types';
+import { UpdateUserDto } from 'types';
 import { UserModel } from './user.model';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from '../base/public.decorator';

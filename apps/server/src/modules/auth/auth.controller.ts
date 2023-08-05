@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post, Headers } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/AuthDto';
-import { JwtPayload } from './jwt-payload.type';
+import { JwtPayload } from 'types';
 import { Requestor } from './requestor.decorator';
 import { Public } from '../base/public.decorator';
 import { Roles } from './roles/roles.decorator';

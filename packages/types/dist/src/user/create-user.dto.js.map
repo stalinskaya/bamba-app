@@ -1,0 +1,1 @@
+{"version":3,"file":"create-user.dto.js","sourceRoot":"","sources":["../../../src/user/create-user.dto.ts"],"names":[],"mappings":";;;AAEA,MAAa,aAAa;CAIzB;AAJD,sCAIC","sourcesContent":["import { Role } from \"src/auth/role.type\";\n\nexport class CreateUserDto {\n  username: string;\n  password: string;\n  roles: Role[];\n}\n"]}
