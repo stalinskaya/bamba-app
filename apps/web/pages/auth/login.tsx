@@ -4,25 +4,23 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primeflex/primeflex.css";
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { useState } from 'react';
+import { CreateUserDto } from 'types';
 
-export default function Home() {
+export default function Login() {
   const [username, setUsername] = useState('username');
   const [password, setPassword] = useState('password');
-  const [isLogged, setIsLogged] = useState(false);
-
+  
   const authService = new AuthService();
 
-  const onSubmit = ((event) => {
-    console.log(`Hello ${username}`);
+  const onSubmit = (() => {
     setUsername('');
     setPassword('');
-    return authService.login({username, password})
+    return authService.login({username, password} as CreateUserDto)
         .then(() => {
-          setIsLogged(authService.isLoggedIn());
         })
-        .catch(alertService.error);
+        .catch();
   });
 
   return (

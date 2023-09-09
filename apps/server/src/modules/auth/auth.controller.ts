@@ -1,15 +1,19 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto/AuthDto';
+import { AuthDto } from 'types';
 import { JwtPayload } from 'types';
 import { Requestor } from './requestor.decorator';
 import { Public } from '../base/public.decorator';
 import { Roles } from './roles/roles.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiBearerAuth('default')
+  @UseGuards(AuthGuard)
   @Get('me')
   @Roles('user')
   me(@Requestor() requestor: JwtPayload) {

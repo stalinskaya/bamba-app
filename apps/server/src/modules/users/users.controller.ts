@@ -7,13 +7,15 @@ import {
   HttpStatus,
   Param,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
 import { BaseService } from '../base/base.service';
 import { CreateUserDto } from 'types';
 import { UpdateUserDto } from 'types';
 import { UserModel } from './user.model';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../base/public.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('users')
 @ApiTags('users')

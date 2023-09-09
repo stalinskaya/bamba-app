@@ -7,10 +7,11 @@ import { UsersModule } from './modules/users/users.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TokenMiddleware } from './modules/auth/token.middleware';
+import { conf } from './conf';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://root:password@localhost:7500'),
+    MongooseModule.forRoot(conf.db.uri),
     PostsModule,
     UsersModule,
     AuthModule,

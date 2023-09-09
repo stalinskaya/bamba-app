@@ -8,16 +8,20 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { CreatePostDto } from 'types';
+import { UpdatePostDto } from 'types';
 import { BaseService } from '../base/base.service';
 import { PostModel } from './post.model';
 import { Roles } from '../auth/roles/roles.decorator';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Requestor } from '../auth/requestor.decorator';
 import { JwtPayload } from 'types';
+import { AuthGuard } from '../auth/auth.guard';
 
+@ApiBearerAuth('default')
+@UseGuards(AuthGuard)
 @ApiTags('posts')
 @Controller('posts')
 export class PostsController {

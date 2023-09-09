@@ -9,15 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateUserDto = void 0;
+exports.UpdatePostDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
-const create_user_dto_1 = require("./create-user.dto");
+const create_post_dto_1 = require("./create-post.dto");
 const swagger_1 = require("@nestjs/swagger");
-class UpdateUserDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.CreateUserDto) {
+class UpdatePostDto extends (0, mapped_types_1.PartialType)(create_post_dto_1.CreatePostDto) {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'yaninas' }),
+    (0, swagger_1.ApiProperty)({ example: 'Test' }),
     __metadata("design:type", String)
-], UpdateUserDto.prototype, "username", void 0);
-exports.UpdateUserDto = UpdateUserDto;
-//# sourceMappingURL=update-user.dto.js.map
+], UpdatePostDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 0 }),
+    __metadata("design:type", Number)
+], UpdatePostDto.prototype, "likes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 0 }),
+    __metadata("design:type", Number)
+], UpdatePostDto.prototype, "rate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: '123456' }),
+    __metadata("design:type", String)
+], UpdatePostDto.prototype, "authorid", void 0);
+exports.UpdatePostDto = UpdatePostDto;
+//# sourceMappingURL=update-post.dto.js.map

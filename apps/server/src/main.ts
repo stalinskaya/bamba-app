@@ -9,9 +9,37 @@ const swaggerSetup = (app: INestApplication) => {
     .setDescription('The posts API description')
     .setVersion('1.0')
     .addTag('posts')
+    .addBearerAuth(
+      {
+        type: 'http',
+      },
+      'default',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+
+  const options = {
+    // swaggerOptions: {
+    //   authAction: {
+    //     defaultBearerAuth: {
+    //       name: 'defaultBearerAuth',
+    //       schema: {
+    //         description: 'Default',
+    //         type: 'http',
+    //         in: 'header',
+    //         scheme: 'bearer',
+    //         bearerFormat: 'JWT',
+    //       },
+    //     },
+    //   },
+    // },
+  };
+
+  SwaggerModule.setup(
+    'api',
+    app,
+    document,
+  );
 };
 
 async function bootstrap() {

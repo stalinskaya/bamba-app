@@ -16,6 +16,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./auth/role.type"), exports);
 __exportStar(require("./auth/jwt-payload.type"), exports);
+__exportStar(require("./auth/auth.dto"), exports);
 __exportStar(require("./user/create-user.dto"), exports);
 __exportStar(require("./user/update-user.dto"), exports);
+__exportStar(require("./post/create-post.dto"), exports);
+__exportStar(require("./post/update-post.dto"), exports);
 //# sourceMappingURL=index.js.map
